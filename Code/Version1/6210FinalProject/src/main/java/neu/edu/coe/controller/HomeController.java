@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,6 +35,8 @@ public class HomeController {
 	
 	@Autowired
 	UserService userService;
+	ApplicationContext context = new ClassPathXmlApplicationContext("neu/edu/coe/beans/beans.xml");
+	UserDaoImp userDaoImp = (UserDaoImp) context.getBean("UserDaoImp");
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String homePage(){
@@ -45,12 +48,10 @@ public class HomeController {
 	}
 	@RequestMapping(value = "/registering", method = RequestMethod.POST)
 	public String register(HttpServletRequest request) throws ClassNotFoundException, SQLException{
-		ApplicationContext context = new ClassPathXmlApplicationContext("neu/edu/coe/beans/beans.xml");
-		UserDaoImp userDaoImp = (UserDaoImp) context.getBean("UserDaoImp");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		User newUser = new User(username, password);
-		userService.registryUser(newUser);
+		userDaoImp.insert(newUser);
 		return "registered";
 	}
 	
@@ -58,13 +59,17 @@ public class HomeController {
 	public String loggingIn(HttpServletRequest request) throws ClassNotFoundException, SQLException{
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		ApplicationContext context = new ClassPathXmlApplicationContext("neu/edu/coe/beans/beans.xml");
-		UserDaoImp userDaoImp = (UserDaoImp) context.getBean("UserDaoImp");
 		User user = userDaoImp.findByUserName(username);
-		System.out.println(user);
 		if(user.getPassword().equals(password))
 			return "loggedIn";
 		else
 			return "wrong";
+	}
+	
+	public void getAllUser(){
+		List<User> users = userDaoImp.getUsers();
+		for(User user: users){
+			System.out.println(user);
+		}
 	}
 }

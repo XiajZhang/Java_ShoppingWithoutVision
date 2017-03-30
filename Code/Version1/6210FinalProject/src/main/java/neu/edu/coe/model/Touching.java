@@ -12,16 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
-
 @Table(name = "touching")
 @Entity
 public class Touching {
 
-	@Id
-	@GeneratedValue(generator = "foreigngen")
-	@GenericGenerator(strategy = "foreign", name = "foreigngen")
-	@Column(name = "pid")
 	private Integer pid;
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER, mappedBy = "shape")
 	private Set<Shape> shapeId = new HashSet<Shape>();

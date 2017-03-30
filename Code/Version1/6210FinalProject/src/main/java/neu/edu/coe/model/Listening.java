@@ -6,15 +6,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
 
 @Table(name = "listening")
 @Entity
 public class Listening {
-	@Id
-	@GeneratedValue(generator = "foreigngen")
-	@GenericGenerator(strategy = "foreign", name = "foreigngen")
-	@Column(name = "pid")
+
 	private Integer pid;
 	private String description;
 	private Integer size;
