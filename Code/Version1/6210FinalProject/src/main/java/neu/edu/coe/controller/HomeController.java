@@ -45,34 +45,26 @@ public class HomeController {
 	}
 	@RequestMapping(value = "/registering", method = RequestMethod.POST)
 	public String register(HttpServletRequest request) throws ClassNotFoundException, SQLException{
-		
 		ApplicationContext context = new ClassPathXmlApplicationContext("neu/edu/coe/beans/beans.xml");
 		UserDaoImp userDaoImp = (UserDaoImp) context.getBean("UserDaoImp");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		User newUser = new User(username, password);
-		userDaoImp.insert(newUser);
+		userService.registryUser(newUser);
 		return "registered";
 	}
+	
 	@RequestMapping(value = "/Login", method = RequestMethod.POST)
 	public String loggingIn(HttpServletRequest request) throws ClassNotFoundException, SQLException{
-		
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		
-		Class.forName("com.mysql.jdbc.Driver");
-        
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","zxj19940612");
-        String sql = "select * from user where username = ? and password = ?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setString(1, username);
-        ps.setString(2, password);
-        ResultSet rs = ps.executeQuery();
-        boolean ok = rs.next();
-        if(ok){
-        	return "loggedIn";
-        }
-        else
-        	return "wrong";
+		ApplicationContext context = new ClassPathXmlApplicationContext("neu/edu/coe/beans/beans.xml");
+		UserDaoImp userDaoImp = (UserDaoImp) context.getBean("UserDaoImp");
+		User user = userDaoImp.findByUserName(username);
+		System.out.println(user);
+		if(user.getPassword().equals(password))
+			return "loggedIn";
+		else
+			return "wrong";
 	}
 }

@@ -5,7 +5,6 @@ public class User {
 	private Integer uid;
 	private String username;
 	private String password;
-	private String name;
 	private String email;
 	private String phone;
 	
@@ -14,12 +13,17 @@ public class User {
 		this.password = password;
 	}
 	
-	public User(Integer uid, String username, String password, String name, String email, String phone) {
+	
+	public User() {
+		super();
+	}
+
+
+	public User(Integer uid, String username, String password, String email, String phone) {
 		super();
 		this.uid = uid;
 		this.username = username;
 		this.password = password;
-		this.name = name;
 		this.email = email;
 		this.phone = phone;
 	}
@@ -41,12 +45,6 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
 	public String getEmail() {
 		return email;
 	}
@@ -61,7 +59,7 @@ public class User {
 	}
 	@Override
 	public String toString() {
-		return "User [uid=" + uid + ", username=" + username + ", password=" + password + ", name=" + name + ", email="
+		return "User [uid=" + uid + ", username=" + username + ", password=" + password + ", email="
 				+ email + ", phone=" + phone + "]";
 	}
 	
