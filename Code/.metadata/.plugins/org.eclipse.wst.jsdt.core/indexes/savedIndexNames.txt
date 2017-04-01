@@ -1,0 +1,7 @@
+INDEX VERSION 1.3+/Users/Cyan/github/Java_ShoppingWithoutVision/Code/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
+2628021942.index
+3914441539.index
+3228701769.index
+2074514523.index
+390511686.index
+1544625225.index
