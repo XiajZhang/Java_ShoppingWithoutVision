@@ -1,0 +1,23 @@
+package neu.edu.coe.mapper;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.springframework.jdbc.core.RowMapper;
+
+import neu.edu.coe.model.Category;
+
+
+public class CategoryRowMapper implements RowMapper<Category> {
+
+	@Override
+	public Category mapRow(ResultSet rs, int rowNum) throws SQLException {
+		Category category = new Category();
+//		category.getCid();
+//		category.getCname();
+		category.setCid(rs.getInt("cid"));
+		category.setCname(rs.getString("cname"));
+
+		return category;
+	}
+}
