@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/eshop">
+		</property>
+		<property name="username" value="root"></property>
+		<property name="password" value="zxj19940612"></property>
+	</bean>
+
+	<bean id="UserDaoImp" class="neu.edu.coe.dao.UserDaoImp">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<bean id="ProductDaoImp" class="neu.edu.coe.dao.ProductDaoImp">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<bean id="CategoryDaoImp" class="neu.edu.coe.dao.CategoryDaoImp">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<bean id="AddressDaoImp" class="neu.edu.coe.dao.AddressDaoImp">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<bean id="OrderDaoImp" class="neu.edu.coe.dao.OrderDaoImp">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<bean id="CartDaoImp" class="neu.edu.coe.dao.CartDaoImp">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<bean id="OrderItemDaoImp" class="neu.edu.coe.dao.OrderItemDaoImp">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<bean id="CommentDaoImp" class="neu.edu.coe.dao.CommentDaoImp">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+</beans>
